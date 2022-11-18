@@ -3,33 +3,21 @@ const express = require("express");
 const { ctrlWrapper } = require("../../helpers");
 const ctrl = require("../../controllers/auth");
 
-const { validateBody, isLoggedIn } = require("../../middlewares");
-const { schemas } = require("../../models/user");
+// const { validator, isLoggedIn } = require("../../middlewares");
+// const { schemas } = require("../../models/user");
 
 const router = express.Router();
 
-router.post(
-  "/signup",
-  validateBody(schemas.signupSchema),
-  ctrlWrapper(ctrlAuth.signup)
-);
+router.post("/signup", () => {});
 
-router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
+router.get("/verify/:verificationToken", () => {});
 
-router.post(
-  "/verify",
-  validateBody(schemas.verifyEmailSchema),
-  ctrlWrapper(ctrl.resendVerifyEmail)
-);
+router.post("/verify", () => {});
 
-router.post(
-  "/login",
-  validateBody(schemas.loginSchema),
-  ctrlWrapper(ctrl.login)
-);
+router.post("/login", () => {});
 
-router.get("/current", isLoggedIn, ctrlWrapper(ctrl.getCurrent));
+router.get("/current", () => {});
 
-router.get("/logout", isLoggedIn, ctrlWrapper(ctrl.logout));
+router.get("/logout", () => {});
 
 module.exports = router;
