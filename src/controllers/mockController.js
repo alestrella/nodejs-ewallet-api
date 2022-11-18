@@ -56,9 +56,11 @@ const mockData = {
   ],
 };
 
-export const mockGetFunction = (req, res) => {
+const mockGetFunction = (req, res) => {
   const { pageNumber = null } = req.params;
   const resData = { ...data };
   if (pageNumber) resData.page = pageNumber;
   res.status(200).json(resData);
 };
+
+module.exports = mockGetFunction;
