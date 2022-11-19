@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 
-const { SECRET_KEY } = process.env;
+const { SECRET_KEY } = require("../config");
 
 const { requestError } = require("../helpers");
 
-const { User } = require("../models/users");
+const { User } = require("../models/user");
 
 const isLoggedIn = async (req, res, next) => {
   try {
