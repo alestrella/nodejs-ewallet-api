@@ -59,7 +59,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "User with email: {{submited email}} already exist"
+                      "example": "Email in use"
                     }
                   }
                 }
