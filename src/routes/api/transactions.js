@@ -1,39 +1,52 @@
 const express = require("express");
 const router = express.Router();
 
-// const ctrlTransactions = require("../../controllers/transactions");
+const ctrlTransactions = require("../../controllers/transactions");
 const ctrlWrapper = require("../../helpers/ctrlWrapper");
-// const validate = require("../../middleware/validate");
+const { validator } = require("../../middlewares");
 // const isLoggedIn = require("../../middlewares");
-const { mockFunction } = require("../../controllers/mockController");
+const { transactionJoiSchemas } = require("../../models/transaction");
+const {
+  mockGetFunction,
+  mockDeleteFunction,
+  mockAddFunction,
+} = require("../../controllers/mockController");
 
 router.get(
   "/",
   // isLoggedIn,
-  ctrlWrapper(mockFunction)
-);
-
-router.get(
-  "/:pageNumber",
-  // isLoggedIn,
-  ctrlWrapper(mockFunction)
+  //fake log func
+  (req, res, next) => {
+    req.user = {
+      _id: "123456789012345678901234",
+      username: "tester",
+      email: "email@email.xx",
+    };
+    next();
+  },
+  ctrlWrapper(ctrlTransactions.getTransactions)
 );
 
 router.post(
   "/",
   //   isLoggedIn,
-  //   validate(addTransactionSchema),
-  ctrlWrapper((req, res) => {
-    res.status(200).json({ message: "post done" });
-  })
+  validator(transactionJoiSchemas.addTransactionSchema),
+  //fake log func
+  (req, res, next) => {
+    req.user = {
+      _id: "123456789012345678901234",
+      username: "tester",
+      email: "email@email.xx",
+    };
+    next();
+  },
+  ctrlWrapper(ctrlTransactions.addTransaction)
 );
 
 router.delete(
   "/:transactionId",
   //   isLoggedIn,
-  ctrlWrapper((req, res) => {
-    res.status(200).json({ message: "delete done" });
-  })
+  ctrlWrapper(mockDeleteFunction)
 );
 
 module.exports = router;

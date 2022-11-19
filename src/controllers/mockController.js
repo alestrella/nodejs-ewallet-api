@@ -58,9 +58,17 @@ const mockData = {
 
 const mockGetFunction = (req, res) => {
   const { pageNumber = null } = req.params;
-  const resData = { ...data };
-  if (pageNumber) resData.page = pageNumber;
+  const resData = { ...mockData };
+  if (pageNumber) resData.page = Number(pageNumber);
   res.status(200).json(resData);
 };
 
-module.exports = mockGetFunction;
+const mockAddFunction = (req, res) => {
+  res.status(200).json({ message: "post done" });
+};
+
+const mockDeleteFunction = (req, res) => {
+  res.status(200).json({ message: "remove done" });
+};
+
+module.exports = { mockGetFunction, mockAddFunction, mockDeleteFunction };
