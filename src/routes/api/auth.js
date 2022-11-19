@@ -14,8 +14,8 @@ router.post(
   ctrlWrapper(ctrl.signup)
 );
 
-router.post("/login", () => {});
+router.post("/login", validator(schemas.loginSchema), ctrlWrapper(ctrl.login));
 
-router.get("/logout", () => {});
+router.get("/logout", isLoggedIn, ctrlWrapper(ctrl.logout));
 
 module.exports = router;

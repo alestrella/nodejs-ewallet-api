@@ -7,27 +7,21 @@ const { User } = require("../../models/user");
 
 const { requestError } = require("../../helpers");
 
-const signup = async (req, res) => {
-  const { email, password, name } = req.body;
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  const passwordCompare = bcrypt.compare(password, user.password);
 
-  const oldUser = await User.findOne({ email });
-  if (oldUser) {
-    throw requestError(409, "Email in use");
+  if (!user || !passwordCompare) {
+    throw requestError(401, "Email or password is wrong");
   }
-  const hashPassword = await bcrypt.hash(password, 10);
-
-  const user = await User.create({
-    email,
-    password: hashPassword,
-    name,
-  });
 
   const token = jwt.sign({ id: user._id }, SECRET_KEY, {
     expiresIn: "1d",
   });
   await User.findByIdAndUpdate(user._id, { token });
 
-  res.status(201).json({
+  res.json({
     token,
     user: {
       email: user.email,
@@ -37,4 +31,4 @@ const signup = async (req, res) => {
   });
 };
 
-module.exports = signup;
+module.exports = login;
