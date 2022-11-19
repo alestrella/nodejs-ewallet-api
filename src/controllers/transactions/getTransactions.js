@@ -1,4 +1,5 @@
 const { Transaction } = require("../../models/transaction");
+const getBalance = require("./getBalance");
 
 const getTransactions = async (req, res) => {
   const { _id: owner } = req.user;
@@ -14,10 +15,23 @@ const getTransactions = async (req, res) => {
     searchQuery,
     "-updatedAt",
     pageParams
-  ).populate("owner", "email");
-  const transactions = data.map((rec) => ({ ...rec, data: rec.createdAt }));
-  const resData = { transactions };
-  if (pageNumber) resData.page = Number(pageNumber);
+  ).sort({ createdAt: -1 });
+  console.log("data", data);
+  const transactions = data.map(
+    ({ _id, income, comment, category, sum, balance, createdAt }) => ({
+      id: _id,
+      date: createdAt,
+      income,
+      comment,
+      category,
+      sum,
+      balance,
+    })
+  );
+  const totalBalance = await getBalance(owner);
+  const count = await Transaction.count();
+  const totalPages = Math.ceil(count / limit);
+  const resData = { page, totalPages, totalBalance, transactions };
   res.status(200).json(resData);
 };
 

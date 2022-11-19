@@ -6,11 +6,6 @@ const ctrlWrapper = require("../../helpers/ctrlWrapper");
 const { validator } = require("../../middlewares");
 // const isLoggedIn = require("../../middlewares");
 const { transactionJoiSchemas } = require("../../models/transaction");
-const {
-  mockGetFunction,
-  mockDeleteFunction,
-  mockAddFunction,
-} = require("../../controllers/mockController");
 
 router.get(
   "/",
@@ -46,7 +41,7 @@ router.post(
 router.delete(
   "/:transactionId",
   //   isLoggedIn,
-  ctrlWrapper(mockDeleteFunction)
+  ctrlWrapper(ctrlTransactions.deleteTransaction)
 );
 
 module.exports = router;
