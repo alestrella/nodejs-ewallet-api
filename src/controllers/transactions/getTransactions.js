@@ -5,17 +5,13 @@ const getTransactions = async (req, res) => {
   const { _id: owner } = req.user;
   const { pageNumber = null } = req.params;
   const { page = null, limit = 10 } = req.query;
-  const pageParams = {};
-  if (page) {
-    pageParams.skip = (page - 1) * limit;
-    pageParams.limit = limit;
-  }
+  const skip = page ? (page - 1) * limit : 0;
+  const pageLength = page ? limit : 0;
   const searchQuery = { owner };
-  const data = await Transaction.find(
-    searchQuery,
-    "-updatedAt",
-    pageParams
-  ).sort({ createdAt: -1 });
+  const data = await Transaction.find(searchQuery, "-updatedAt")
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(pageLength);
   console.log("data", data);
   const transactions = data.map(
     ({ _id, income, comment, category, sum, balance, createdAt }) => ({
