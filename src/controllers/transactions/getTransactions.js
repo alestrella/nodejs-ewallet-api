@@ -3,7 +3,6 @@ const getBalance = require("./getBalance");
 
 const getTransactions = async (req, res) => {
   const { _id: owner } = req.user;
-  const { pageNumber = null } = req.params;
   const { page = null, limit = 10 } = req.query;
   const skip = page ? (page - 1) * limit : 0;
   const pageLength = page ? limit : 0;
