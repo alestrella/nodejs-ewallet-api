@@ -2,7 +2,6 @@ const { Transaction } = require("../../models/transaction");
 const getBalance = require("./getBalance");
 
 const addTransaction = async (req, res) => {
-  console.log(req.body);
   const { _id: owner } = req.user;
   const body = req.body;
   let balance = await getBalance(owner);
