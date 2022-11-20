@@ -41,7 +41,6 @@ userSchema.post("save", handleSaveError);
 const signupSchema = Joi.object({
   email: Joi.string().pattern(emailRegex).required(),
   password: Joi.string().min(8).max(16).required(),
-  confirmPassword: Joi.string().min(8).required().valid(Joi.ref("password")),
   name: Joi.string().min(3).required(),
 });
 
