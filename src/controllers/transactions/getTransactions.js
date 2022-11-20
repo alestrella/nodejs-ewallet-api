@@ -11,7 +11,6 @@ const getTransactions = async (req, res) => {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(pageLength);
-  console.log("data", data);
   const transactions = data.map(
     ({ _id, income, comment, category, sum, balance, createdAt }) => ({
       id: _id,
