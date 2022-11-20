@@ -3,18 +3,17 @@
   "info": {
     "version": "1.0.0",
     "title": "EWallet API",
-    "description": "EWallet API overview",
-    "license": {
-      "name": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
-    }
+    "description": "EWallet API overview"
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "servers": [
-    { "url": "", "description": "Main (production) server" },
     {
-      "url": "http://localhost:4000/api",
+      "url": "https://ewallet-api.onrender.com",
+      "description": "Main (production) server"
+    },
+    {
+      "url": "http://localhost:4000",
       "description": "Development server"
     }
   ],
@@ -59,7 +58,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Email in use"
+                      "example": "User with email: {{submited email}} already exist"
                     }
                   }
                 }
