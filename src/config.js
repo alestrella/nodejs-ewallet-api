@@ -1,5 +1,10 @@
 require("dotenv").config();
 
-const { DB_HOST = "", PORT = 4000, SECRET_KEY } = process.env;
+const {
+  DB_HOST = "",
+  PORT = 4000,
+  SECRET_KEY,
+  REFRESH_SECRET_KEY,
+} = process.env;
 
-module.exports = { PORT, DB_HOST, SECRET_KEY };
+module.exports = { PORT, DB_HOST, SECRET_KEY, REFRESH_SECRET_KEY };

@@ -18,4 +18,6 @@ router.post("/login", validator(schemas.loginSchema), ctrlWrapper(ctrl.login));
 
 router.get("/logout", isLoggedIn, ctrlWrapper(ctrl.logout));
 
+router.get("/refresh", () => {});
+
 module.exports = router;
