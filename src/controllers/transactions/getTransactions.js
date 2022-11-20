@@ -23,7 +23,7 @@ const getTransactions = async (req, res) => {
     })
   );
   const totalBalance = await getBalance(owner);
-  const count = await Transaction.count();
+  const count = await Transaction.count(searchQuery);
   const totalPages = Math.ceil(count / limit);
   const resData = { page, totalPages, totalBalance, transactions };
   res.status(200).json(resData);
