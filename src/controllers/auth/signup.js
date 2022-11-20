@@ -8,7 +8,7 @@ const { User } = require("../../models/user");
 const { requestError } = require("../../helpers");
 
 const signup = async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password, username } = req.body;
 
   const oldUser = await User.findOne({ email });
   if (oldUser) {
@@ -19,10 +19,11 @@ const signup = async (req, res) => {
   const user = await User.create({
     email,
     password: hashPassword,
-    name,
+    username,
   });
 
-  const token = jwt.sign({ id: user._id }, SECRET_KEY, {
+  const payload = { id: user._id };
+  const token = jwt.sign(payload, SECRET_KEY, {
     expiresIn: "1d",
   });
   await User.findByIdAndUpdate(user._id, { token });
@@ -31,7 +32,7 @@ const signup = async (req, res) => {
     token,
     user: {
       email: user.email,
-      name: user.name,
+      username: user.username,
       balance: user.balance,
     },
   });

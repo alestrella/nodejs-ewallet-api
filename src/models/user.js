@@ -18,7 +18,7 @@ const userSchema = new Schema(
       minLenght: [8, "Passwords must be at least 8 characters long."],
       required: [true, "Password is required"],
     },
-    name: {
+    username: {
       type: String,
       minLenght: [3],
       required: [true, "Email is required"],
@@ -26,10 +26,6 @@ const userSchema = new Schema(
     token: {
       type: String,
       default: null,
-    },
-    balance: {
-      type: Number,
-      default: 0,
     },
     //TODO: add categories
   },
@@ -41,8 +37,7 @@ userSchema.post("save", handleSaveError);
 const signupSchema = Joi.object({
   email: Joi.string().pattern(emailRegex).required(),
   password: Joi.string().min(8).max(16).required(),
-  confirmPassword: Joi.string().min(8).required().valid(Joi.ref("password")),
-  name: Joi.string().min(3).required(),
+  username: Joi.string().min(3).required(),
 });
 
 const loginSchema = Joi.object({

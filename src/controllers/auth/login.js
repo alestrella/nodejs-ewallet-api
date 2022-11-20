@@ -9,14 +9,17 @@ const { requestError } = require("../../helpers");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
+
   const user = await User.findOne({ email });
-  const passwordCompare = bcrypt.compare(password, user.password);
+  const passwordCompare = await bcrypt.compare(password, user.password);
+  console.log(passwordCompare);
 
   if (!user || !passwordCompare) {
     throw requestError(401, "Email or password is wrong");
   }
 
-  const token = jwt.sign({ id: user._id }, SECRET_KEY, {
+  const payload = { id: user._id };
+  const token = jwt.sign(payload, SECRET_KEY, {
     expiresIn: "1d",
   });
   await User.findByIdAndUpdate(user._id, { token });
@@ -25,8 +28,7 @@ const login = async (req, res) => {
     token,
     user: {
       email: user.email,
-      name: user.name,
-      balance: user.balance,
+      username: user.username,
     },
   });
 };
