@@ -23,11 +23,13 @@ const signup = async (req, res) => {
     username,
   });
 
-  // const token = jwt.sign({ id: user._id }, SECRET_KEY, {
-  //   expiresIn: "1d",
-  // });
-  const tokens = generateTokens({ id: user._id });
-  await saveToken(user._id);
+  // const tokens = generateTokens({ id: user._id });
+  // await saveToken(user._id);
+  const payload = { id: user._id };
+  const token = jwt.sign(payload, SECRET_KEY, {
+    expiresIn: "1d",
+  });
+  await User.findByIdAndUpdate(user._id, { token });
 
   res.status(201).json({
     token: accessToken,
