@@ -225,7 +225,7 @@
     "schemas": {
       "User": {
         "type": "object",
-        "required": ["email", "password", "name"],
+        "required": ["email", "password", "username"],
         "properties": {
           "id": {
             "type": "string",
@@ -245,12 +245,12 @@
         "example": {
           "email": "rick@mail.com",
           "password": "examplepwd12345",
-          "name": "Rick"
+          "username": "Rick"
         }
       },
       "UserSignupRequest": {
         "type": "object",
-        "required": ["email", "password", "name"],
+        "required": ["email", "password", "username"],
         "properties": {
           "email": {
             "type": "string",
@@ -261,7 +261,7 @@
             "type": "string",
             "description": "User's password"
           },
-          "name": {
+          "username": {
             "type": "string",
             "description": "User's name"
           }
@@ -269,7 +269,7 @@
         "example": {
           "email": "rick@mail.com",
           "password": "examplepwd12345",
-          "name": "Rick"
+          "username": "Rick"
         }
       },
       "UserLoginRequest": {
@@ -304,7 +304,7 @@
                 "description": "User's email",
                 "format": "email"
               },
-              "name": {
+              "username": {
                 "type": "string",
                 "description": "User's name"
               }
