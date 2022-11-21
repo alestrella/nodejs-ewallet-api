@@ -6,34 +6,12 @@ const ctrlWrapper = require("../../helpers/ctrlWrapper");
 const { validator, isLoggedIn } = require("../../middlewares");
 const { transactionJoiSchemas } = require("../../models/transaction");
 
-router.get(
-  "/",
-  isLoggedIn,
-  //fake log func
-  // (req, res, next) => {
-  //   req.user = {
-  //     _id: "123456789012345678901234",
-  //     username: "tester",
-  //     email: "email@email.xx",
-  //   };
-  //   next();
-  // },
-  ctrlWrapper(ctrlTransactions.getTransactions)
-);
+router.get("/", isLoggedIn, ctrlWrapper(ctrlTransactions.getTransactions));
 
 router.post(
   "/",
   isLoggedIn,
   validator(transactionJoiSchemas.addTransactionSchema),
-  //fake log func
-  // (req, res, next) => {
-  //   req.user = {
-  //     _id: "123456789012345678901234",
-  //     username: "tester",
-  //     email: "email@email.xx",
-  //   };
-  //   next();
-  // },
   ctrlWrapper(ctrlTransactions.addTransaction)
 );
 

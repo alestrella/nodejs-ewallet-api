@@ -44,7 +44,11 @@ const Joi = require("joi");
 const addTransactionSchema = Joi.object({
   income: Joi.boolean().required(),
   comment: Joi.string().allow(""),
-  category: Joi.string().hex().length(24), // ObjectID format
+  category: Joi.alternatives().conditional("income", {
+    is: true,
+    then: Joi.string().hex().length(24),
+    otherwise: Joi.string().hex().length(24).required(),
+  }),
   sum: Joi.number().required(),
 });
 
