@@ -9,7 +9,7 @@ const { getAll } = require("../../controllers/categories");
  *  get:
  *   tags:
  *     - Categories
- *   summary: All transaction categories
+ *   summary: Get all transaction categories
  *   responses:
  *      '201':
  *         content:
