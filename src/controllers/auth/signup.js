@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 // const jwt = require("jsonwebtoken");
 
-// const { SECRET_KEY } = require("../../config");
+const { SECRET_KEY } = require("../../config/vars");
 
 const { User } = require("../../models/user");
 
@@ -36,7 +36,6 @@ const signup = async (req, res) => {
     user: {
       email: user.email,
       username: user.username,
-      balance: user.balance,
     },
   });
 };
