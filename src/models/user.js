@@ -10,12 +10,13 @@ const { handleSaveError } = require("../helpers");
  *     UserSignupRequest:
  *       type: object
  *       required:
- *        - email
- *        - password
- *        - username
+ *         - email
+ *         - password
+ *         - username
  *       properties:
  *         email:
  *           type: string
+ *           format: email
  *           description: User's email.
  *           example: rick@mail.com
  *         password:
@@ -26,15 +27,6 @@ const { handleSaveError } = require("../helpers");
  *           type: string
  *           description: The user's name.
  *           example: Rick Sanchez
- *     User:
- *       allOf:
- *         - type: object
- *           properties:
- *             _id:
- *               type: string
- *               description: Backend-generated unique identifier.
- *               example: 63599b9170efca38e2a996ed
- *         - $ref: '#/components/schemas/UserSignupRequest'
  *     UserLoginRequest:
  *       type: object
  *       required:
@@ -45,11 +37,28 @@ const { handleSaveError } = require("../helpers");
  *         email:
  *           type: string
  *           description: User's email.
+ *           format: email
  *           example: rick@mail.com
  *         password:
  *           type: string
  *           description: The user's password.
  *           example: examplepwd12345
+ *     UserAuthResponse:
+ *       type: object
+ *       properties:
+ *         token:
+ *           type: string
+ *           example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDhjMzliNmU1MmQ1MWFlZWFiY2MzMyIsImlhdCI6MTY0ODkzNzY1OSwiZXhwIjoxNjQ5MDI0MDU5fQ.R_xVuzsK9Nzs9sj98Lk1lidJB27xDUjhYBOiPU-_fmY'
+ *         user:
+ *           type: object
+ *           properties:
+ *             email:
+ *               type: string
+ *               format: email
+ *               example: rick@mail.com
+ *             password:
+ *               type: string
+ *               example: examplepwd12345
  */
 
 const emailRegex = /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/;
