@@ -3,6 +3,69 @@ const Joi = require("joi");
 
 const { handleSaveError } = require("../helpers");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     UserSignupRequest:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *         - username
+ *       properties:
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: User's email.
+ *           example: rick@mail.com
+ *         password:
+ *           type: string
+ *           minLength: 8
+ *           maxLength: 16
+ *           description: The user's password.
+ *           example: examplepwd12345
+ *         username:
+ *           type: string
+ *           minLength: 3
+ *           description: The user's name.
+ *           example: Rick Sanchez
+ *     UserLoginRequest:
+ *       type: object
+ *       required:
+ *        - email
+ *        - password
+ *        - username
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: User's email.
+ *           format: email
+ *           example: rick@mail.com
+ *         password:
+ *           type: string
+ *           minLength: 8
+ *           maxLength: 16
+ *           description: The user's password.
+ *           example: examplepwd12345
+ *     UserAuthResponse:
+ *       type: object
+ *       properties:
+ *         token:
+ *           type: string
+ *           example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDhjMzliNmU1MmQ1MWFlZWFiY2MzMyIsImlhdCI6MTY0ODkzNzY1OSwiZXhwIjoxNjQ5MDI0MDU5fQ.R_xVuzsK9Nzs9sj98Lk1lidJB27xDUjhYBOiPU-_fmY'
+ *         user:
+ *           type: object
+ *           properties:
+ *             email:
+ *               type: string
+ *               format: email
+ *               example: rick@mail.com
+ *             password:
+ *               type: string
+ *               example: examplepwd12345
+ */
+
 const emailRegex = /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/;
 
 const userSchema = new Schema(
@@ -27,7 +90,6 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
-    //TODO: add categories
   },
   { versionKey: false, timestamps: true }
 );

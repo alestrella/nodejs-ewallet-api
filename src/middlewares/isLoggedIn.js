@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const { SECRET_KEY } = require("../config");
+const { SECRET_KEY } = require("../config/vars");
 
 const { requestError } = require("../helpers");
 

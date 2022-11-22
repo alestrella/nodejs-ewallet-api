@@ -2,6 +2,23 @@ const { Schema, model, SchemaTypes } = require("mongoose");
 
 const { handleSaveError } = require("../helpers");
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    CategoriesResponse:
+ *      type: object
+ *      properties:
+ *        _id:
+ *          type: string
+ *          description: Backend-generated unique identifier.
+ *          example: '63599b9170efca38e2a996ed'
+ *        name:
+ *          type: string
+ *          description: Category's name
+ *          example: Products
+ */
+
 const categoryMongooseSchema = new Schema(
   {
     name: {

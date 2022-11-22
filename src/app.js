@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("../swagger.json");
+
+const swaggerSpec = require("./config/swagger");
 
 const authRouter = require("./routes/api/auth");
 const transactionsRouter = require("./routes/api/transactions");
@@ -22,7 +23,7 @@ app.use("/api/transactions", transactionsRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/currency", currencyRouter);
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
