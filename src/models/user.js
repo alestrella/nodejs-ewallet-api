@@ -21,10 +21,13 @@ const { handleSaveError } = require("../helpers");
  *           example: rick@mail.com
  *         password:
  *           type: string
+ *           minLength: 8
+ *           maxLength: 16
  *           description: The user's password.
  *           example: examplepwd12345
  *         username:
  *           type: string
+ *           minLength: 3
  *           description: The user's name.
  *           example: Rick Sanchez
  *     UserLoginRequest:
@@ -41,6 +44,8 @@ const { handleSaveError } = require("../helpers");
  *           example: rick@mail.com
  *         password:
  *           type: string
+ *           minLength: 8
+ *           maxLength: 16
  *           description: The user's password.
  *           example: examplepwd12345
  *     UserAuthResponse:

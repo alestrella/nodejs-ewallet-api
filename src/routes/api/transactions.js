@@ -12,23 +12,23 @@ const { transactionJoiSchemas } = require("../../models/transaction");
  *  post:
  *    tags:
  *      - Transactions
- *    summary: Create new transactions (requires authentication token)
+ *    summary: Create new transaction
  *    security:
  *      - bearerAuth: []
  *    requestBody:
- *      description: Transaction's object
+ *      description: Transaction's object (requires authentication token)
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Request'
+ *            $ref: '#/components/schemas/CreateTransactionRequest'
  *    responses:
  *      '201':
  *        description: Successful operation
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Response'
+ *              $ref: '#/components/schemas/CreateTransactionResponse'
  *      '400':
  *        description: Bad request (invalid request body).
  *      '401':
@@ -50,9 +50,15 @@ router.post(
  *  get:
  *   tags:
  *     - Transactions
- *   summary: Get all transactions by user
+ *   summary: Get transactions by user
  *   security:
  *     - bearerAuth: []
+ *   parameters:
+ *     - in: query
+ *       name: page
+ *       schema:
+ *         type: integer
+ *       description: Returned search results are paginated. Use this parameter to select the page number (start from 1).
  *   responses:
  *      '200':
  *        description: Successful operation
@@ -88,8 +94,16 @@ router.get("/", isLoggedIn, ctrlWrapper(ctrlTransactions.getTransactions));
  *        description: Successful operation
  *        content:
  *          application/json:
- *              schema:
- *                  $ref: '#/components/schemas/TransactionDeleteResponse'
+ *            schema:
+ *              type: object
+ *              properties:
+ *                _id:
+ *                  type: string
+ *                  description: Transaction ID.
+ *                  example: 63599b9170efca38e2a996ed
+ *                message:
+ *                  type: string
+ *                  example: Transaction deleted
  *      '401':
  *         description: Unauthorized (invalid access token)
  *      '404':
