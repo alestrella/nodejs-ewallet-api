@@ -1,9 +1,9 @@
 const axios = require("axios");
 
-const convertFunction = ({ ccy, buy, sell }) => ({
+const convertFunction = ({ ccy, buy, sale }) => ({
   code: ccy,
   buy,
-  sell,
+  sell: sale,
 });
 
 const getCurrencyPrivat = (query) => async () => {
