@@ -27,11 +27,13 @@ const swaggerDefinition = {
     { name: "Categories", description: "Categories endpoints" },
     { name: "Currency", description: "Exchange rate from Privat bank API" },
   ],
-  securitySchemes: {
-    Bearer: {
-      type: "http",
-      scheme: "bearer",
-      bearerFormat: "JWT",
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
     },
   },
 };
