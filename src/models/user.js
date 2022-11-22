@@ -61,9 +61,9 @@ const { handleSaveError } = require("../helpers");
  *               type: string
  *               format: email
  *               example: rick@mail.com
- *             password:
+ *             username:
  *               type: string
- *               example: examplepwd12345
+ *               example: Rick Sanchez
  */
 
 const emailRegex = /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/;
