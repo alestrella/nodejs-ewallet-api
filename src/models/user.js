@@ -3,6 +3,55 @@ const Joi = require("joi");
 
 const { handleSaveError } = require("../helpers");
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     UserSignupRequest:
+ *       type: object
+ *       required:
+ *        - email
+ *        - password
+ *        - username
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: User's email.
+ *           example: rick@mail.com
+ *         password:
+ *           type: string
+ *           description: The user's password.
+ *           example: examplepwd12345
+ *         username:
+ *           type: string
+ *           description: The user's name.
+ *           example: Rick Sanchez
+ *     User:
+ *       allOf:
+ *         - type: object
+ *           properties:
+ *             _id:
+ *               type: string
+ *               description: Backend-generated unique identifier.
+ *               example: 63599b9170efca38e2a996ed
+ *         - $ref: '#/components/schemas/UserSignupRequest'
+ *     UserLoginRequest:
+ *       type: object
+ *       required:
+ *        - email
+ *        - password
+ *        - username
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: User's email.
+ *           example: rick@mail.com
+ *         password:
+ *           type: string
+ *           description: The user's password.
+ *           example: examplepwd12345
+ */
+
 const emailRegex = /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/;
 
 const userSchema = new Schema(
@@ -27,7 +76,6 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
-    //TODO: add categories
   },
   { versionKey: false, timestamps: true }
 );

@@ -9,18 +9,19 @@
   "produces": ["application/json"],
   "servers": [
     {
-      "url": "https://ewallet-api.onrender.com",
+      "url": "https://ewallet-api.onrender.com/api",
       "description": "Main (production) server"
     },
     {
-      "url": "http://localhost:4000",
+      "url": "http://localhost:4000/api",
       "description": "Development server"
     }
   ],
   "tags": [
     { "name": "Auth", "description": "Authorization endpoints" },
     { "name": "Users", "description": "User endpoints" },
-    { "name": "Transactions", "description": "Transactions endpoints" }
+    { "name": "Transactions", "description": "Transactions endpoints" },
+    { "name": "Categories", "description": "Categories endpoints" }
   ],
   "paths": {
     "/auth/signup": {
@@ -177,45 +178,22 @@
         }
       }
     },
-    "/users/categories": {
+    "/categories": {
       "get": {
-        "tags": ["Users"],
-        "summary": "All transaction categories (requires authentication token)",
+        "tags": ["Categories"],
+        "summary": "All transaction categories",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "" }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": "",
             "content": {
-              "application/json": {}
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Missing header with authorization token",
-            "content": {
               "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Not authorized"
-                    }
-                  }
-                }
+                "schema": { "$ref": "#/components/schemas/CategoriesResponse" }
               }
             }
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
@@ -235,17 +213,19 @@
           "email": {
             "type": "string",
             "description": "User's email",
-            "format": "email"
+            "format": "email",
+            "email": "rick@mail.com"
           },
           "password": {
             "type": "string",
-            "description": "User's password"
+            "description": "User's password",
+            "password": "examplepwd12345"
+          },
+          "username": {
+            "type": "string",
+            "description": "User's name",
+            "username": "Rick Sanchez"
           }
-        },
-        "example": {
-          "email": "rick@mail.com",
-          "password": "examplepwd12345",
-          "username": "Rick"
         }
       },
       "UserSignupRequest": {
@@ -255,21 +235,19 @@
           "email": {
             "type": "string",
             "format": "email",
-            "description": "User's email"
+            "description": "User's email",
+            "email": "rick@mail.com"
           },
           "password": {
             "type": "string",
-            "description": "User's password"
+            "description": "User's password",
+            "password": "examplepwd12345"
           },
           "username": {
             "type": "string",
-            "description": "User's name"
+            "description": "User's name",
+            "username": "Rick Sanchez"
           }
-        },
-        "example": {
-          "email": "rick@mail.com",
-          "password": "examplepwd12345",
-          "username": "Rick"
         }
       },
       "UserLoginRequest": {
@@ -278,15 +256,13 @@
         "properties": {
           "email": {
             "type": "string",
-            "format": "email"
+            "format": "email",
+            "email": "rick@mail.com"
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "password": "examplepwd12345"
           }
-        },
-        "example": {
-          "email": "rick@mail.com",
-          "password": "examplepwd12345"
         }
       },
       "UserAuthResponse": {
@@ -302,13 +278,66 @@
               "email": {
                 "type": "string",
                 "description": "User's email",
-                "format": "email"
+                "format": "email",
+                "example": "rick@mail.com"
               },
               "username": {
                 "type": "string",
-                "description": "User's name"
+                "description": "User's name",
+                "example": "Rick Sanchez"
               }
             }
+          }
+        }
+      },
+      "CategoriesResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Backend-generated unique identifier.",
+              "example": "63599b9170efca38e2a996ed"
+            },
+            "name": {
+              "type": "string",
+              "description": "Category's name",
+              "example": "Products"
+            }
+          }
+        }
+      },
+      "Transactions": {
+        "type": "object",
+        "required": ["category", "sum", "balance", "owner"],
+        "properties": {
+          "income": {
+            "type": "boolean",
+            "example": "true"
+          },
+          "comment": {
+            "type": "string",
+            "description": "About a transactions",
+            "example": "New robot vacuum"
+          },
+          "category": {
+            "type": "string",
+            "example": "63599b9170efca38e2a996ed"
+          },
+          "sum": {
+            "type": "number",
+            "description": "Amount of transaction",
+            "example": 700
+          },
+          "balance": {
+            "type": "number",
+            "description": "Total balance after the transaction",
+            "example": 21300
+          },
+          "owner": {
+            "type": "string",
+            "example": "63599b9170efca38e2a996ed"
           }
         }
       }
