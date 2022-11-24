@@ -1,12 +1,12 @@
 const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
-const { SECRET_KEY } = require("../../config/vars");
+const { ACCESS_SECRET_KEY } = require("../../config/vars");
 
 const { User } = require("../../models/user");
 
 const { requestError } = require("../../helpers");
-const { generateTokens, saveToken } = require("../../services/tokens");
+// const { generateTokens, saveToken } = require("../../services/generateTokens");
 
 const signup = async (req, res) => {
   const { email, password, username } = req.body;
@@ -26,13 +26,13 @@ const signup = async (req, res) => {
   // const tokens = generateTokens({ id: user._id });
   // await saveToken(user._id);
   const payload = { id: user._id };
-  const token = jwt.sign(payload, SECRET_KEY, {
+  const token = jwt.sign(payload, ACCESS_SECRET_KEY, {
     expiresIn: "1d",
   });
   await User.findByIdAndUpdate(user._id, { token });
 
   res.status(201).json({
-    token: accessToken,
+    token: user.token,
     user: {
       email: user.email,
       username: user.username,

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const { SECRET_KEY } = require("../config/vars");
+const { ACCESS_SECRET_KEY } = require("../config/vars");
 
 const { requestError } = require("../helpers");
 
@@ -13,7 +13,7 @@ const isLoggedIn = async (req, res, next) => {
     if (bearer !== "Bearer") {
       throw requestError(401);
     }
-    const { id } = jwt.verify(token, SECRET_KEY);
+    const { id } = jwt.verify(token, ACCESS_SECRET_KEY);
 
     const user = await User.findById(id);
 
