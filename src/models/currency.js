@@ -9,20 +9,31 @@ const { handleSaveError } = require("../helpers");
  *     CurrencyResponse:
  *      type: object
  *      properties:
- *        code:
- *          type: string
- *          required: true
- *          description: Backend-generated unique identifier.
- *          example: 'EUR'
- *        buy:
- *          type: integer
- *          example: 39.8
- *        sell:
- *          type: integer
- *          example: 40.1
- *        _id:
- *          type: string
- *          example: '63599b9170efca38e2a996ed'
+ *        cash:
+ *          type: boolean
+ *          description: Backend-generated unique identifier
+ *          example: false
+ *        record:
+ *          type: array
+ *          items:
+ *            type: object
+ *            properties:
+ *              code:
+ *                type: string
+ *                required: true
+ *                description: International Currency Code
+ *                example: 'EUR'
+ *              buy:
+ *                type: integer
+ *                required: true
+ *                example: 39.8
+ *              sell:
+ *                type: integer
+ *                required: true
+ *                example: 40.1
+ *              _id:
+ *                type: string
+ *                example: '63599b9170efca38e2a996ed'
  *
  */
 

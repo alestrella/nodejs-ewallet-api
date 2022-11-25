@@ -6,7 +6,6 @@ const { ACCESS_SECRET_KEY } = require("../../config/vars");
 const { User } = require("../../models/user");
 
 const { requestError } = require("../../helpers");
-// const { generateTokens, saveToken } = require("../../services/generateTokens");
 
 const signup = async (req, res) => {
   const { email, password, username } = req.body;
@@ -23,16 +22,14 @@ const signup = async (req, res) => {
     username,
   });
 
-  // const tokens = generateTokens({ id: user._id });
-  // await saveToken(user._id);
-  const payload = { id: user._id };
-  const token = jwt.sign(payload, ACCESS_SECRET_KEY, {
+  const payload = { userId: user._id };
+  const accessToken = jwt.sign(payload, ACCESS_SECRET_KEY, {
     expiresIn: "1d",
   });
-  await User.findByIdAndUpdate(user._id, { token });
+  await User.findByIdAndUpdate(user._id, { accessToken });
 
   res.status(201).json({
-    token: user.token,
+    accessToken,
     user: {
       email: user.email,
       username: user.username,

@@ -3,7 +3,11 @@ const express = require("express");
 const { ctrlWrapper } = require("../../helpers");
 const ctrlAuth = require("../../controllers/auth");
 
-const { validator, isLoggedIn } = require("../../middlewares");
+const {
+  validator,
+  isLoggedIn,
+  verifyRefreshToken,
+} = require("../../middlewares");
 const { schemas } = require("../../models/user");
 const { tokenJoiSchema } = require("../../models/token");
 
@@ -29,7 +33,7 @@ const router = express.Router();
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/UserCurrentResponse'
+ *              $ref: '#/components/schemas/UserSignupResponse'
  *      '400':
  *        description: Bad request (invalid request body).
  *      '409':
@@ -74,7 +78,7 @@ router.post(
  *      '400':
  *        description: Bad request (invalid request body).
  *      '401':
- *        description: User unauthorized
+ *        description: Unauthorized (invalid access token)
  *        content:
  *          application/json:
  *            schema:
@@ -125,11 +129,19 @@ router.get("/logout", isLoggedIn, ctrlWrapper(ctrlAuth.logout));
  *    requestBody:
  *      description: Request body with session's id
  *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/TokenRequest'
  *    responses:
  *      '200':
  *        description: Successful operation
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/TokenResponse'
  *      '400':
- *        description: Bad request (invalid request body)
+ *        description: Bad request (invalid refresh token)
  *      '401':
  *        description: Unauthorized (invalid access token)
  *      '404':
@@ -138,7 +150,7 @@ router.get("/logout", isLoggedIn, ctrlWrapper(ctrlAuth.logout));
 
 router.post(
   "/refresh",
-  // isLoggedIn,
+  verifyRefreshToken,
   validator(tokenJoiSchema.refreshTokenSchema),
   ctrlWrapper(ctrlAuth.refreshToken)
 );

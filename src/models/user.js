@@ -30,6 +30,23 @@ const { handleSaveError } = require("../helpers");
  *           maxLength: 16
  *           description: The user's password.
  *           example: examplepwd12345
+ *     UserSignupResponse:
+ *       type: object
+ *       properties:
+ *         accessToken:
+ *           type: string
+ *           description: Session's access token (needed for all requests)
+ *           example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDhjMzliNmU1MmQ1MWFlZWFiY2MzMyIsImlhdCI6MTY0ODkzNzY1OSwiZXhwIjoxNjQ5MDI0MDU5fQ.R_xVuzsK9Nzs9sj98Lk1lidJB27xDUjhYBOiPU-_fmY'
+ *         user:
+ *           type: object
+ *           properties:
+ *             email:
+ *               type: string
+ *               format: email
+ *               example: rick@mail.com
+ *             username:
+ *               type: string
+ *               example: Rick Sanchez
  *     UserLoginRequest:
  *       type: object
  *       required:
@@ -58,7 +75,7 @@ const { handleSaveError } = require("../helpers");
  *         refreshToken:
  *           type: string
  *           description: Session's refresh token (needed for /auth/refresh)
- *           example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDhjMzliNmU1MmQ1MWFlZWFiY2MzMyIsImlhdCI6MTY0ODkzNzY1OSwiZXhwIjoxNjQ5MDI0MDU5fQ.R_xVuzsK9Nzs9sj98Lk1lidJB27xDUjhYBOiPU-_fmY'
+ *           example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2QxZDdjMzJmZGU2MTAyNWQ0MTE4ZCIsImVtYWlsIjoiczRiYXRpbkBnbWFpbC5jb20iLCJpYXQiOjE2NjkyMjc5MjAsImV4cCI6MTY2OTMxNDMyMH0.hWUFZTTmG-LgLaDCR87QZuKNFc0p9F-pZTLAYxPBn2k'
  *         user:
  *           type: object
  *           properties:
