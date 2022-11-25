@@ -18,13 +18,13 @@ const generateTokens = async (user) => {
     });
 
     const userId = user._id;
+    // TODO: update accessToken in user
 
     const tokenData = await Token.findOne({ userId });
     if (tokenData) {
       tokenData.refreshToken = refreshToken;
       return tokenData.save();
     }
-    console.log(tokenData);
     const newRefreshToken = await Token.create({ userId, refreshToken });
     return { accessToken, refreshToken: newRefreshToken };
   } catch (error) {
