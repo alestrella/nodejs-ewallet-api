@@ -123,7 +123,7 @@ router.get("/logout", isLoggedIn, ctrlWrapper(ctrlAuth.logout));
  *  post:
  *    tags:
  *      - Auth
- *    summary: Get new pair of tokens (use Bearer {refreshToken} instead of accessToken)
+ *    summary: Get new pair of tokens
  *    security:
  *      - bearerAuth: []
  *    requestBody:
