@@ -4,7 +4,7 @@ E-Wallet Rest API (Using Node.js, Express and MongoDB)
 
 ## API Reference
 
-[Swagger Documentation](https://ewallet-api.onrender.com/api-docs/)
+[Documentation](https://ewallet-api.onrender.com/api-docs/)
 
 ## Authors
 
