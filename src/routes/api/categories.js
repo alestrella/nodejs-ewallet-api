@@ -15,6 +15,8 @@ const { getAll } = require("../../controllers/categories");
  *         content:
  *          application/json:
  *              schema:
+ *                type: array
+ *                items:
  *                  $ref: '#/components/schemas/CategoriesResponse'
  *      '500':
  *         description: Server error

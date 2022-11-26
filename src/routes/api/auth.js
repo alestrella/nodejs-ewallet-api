@@ -3,8 +3,13 @@ const express = require("express");
 const { ctrlWrapper } = require("../../helpers");
 const ctrlAuth = require("../../controllers/auth");
 
-const { validator, isLoggedIn } = require("../../middlewares");
+const {
+  validator,
+  isLoggedIn,
+  verifyRefreshToken,
+} = require("../../middlewares");
 const { schemas } = require("../../models/user");
+const { tokenJoiSchema } = require("../../models/token");
 
 const router = express.Router();
 
@@ -73,7 +78,7 @@ router.post(
  *      '400':
  *        description: Bad request (invalid request body).
  *      '401':
- *        description: User unauthorized
+ *        description: Unauthorized (invalid access token)
  *        content:
  *          application/json:
  *            schema:
@@ -105,11 +110,49 @@ router.post(
  *      '204':
  *        description: Successful operation
  *      '400':
- *        description: Bad request (invalid request body).
+ *        description: Bad request (invalid request body)
  *      '401':
  *        description: Unauthorized (invalid access token)
  */
 
 router.get("/logout", isLoggedIn, ctrlWrapper(ctrlAuth.logout));
+
+/**
+ * @swagger
+ * /auth/refresh:
+ *  post:
+ *    tags:
+ *      - Auth
+ *    summary: Get new pair of tokens (use Bearer {refreshToken} instead of accessToken)
+ *    security:
+ *      - bearerAuth: []
+ *    requestBody:
+ *      description: Request body with session's id
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/TokenRequest'
+ *    responses:
+ *      '200':
+ *        description: Successful operation
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/TokenResponse'
+ *      '400':
+ *        description: Bad request (invalid refresh token)
+ *      '401':
+ *        description: Unauthorized (invalid access token)
+ *      '404':
+ *        description: Invalid user / Invalid session
+ */
+
+router.post(
+  "/refresh",
+  verifyRefreshToken,
+  validator(tokenJoiSchema.refreshTokenSchema),
+  ctrlWrapper(ctrlAuth.refreshToken)
+);
 
 module.exports = router;
