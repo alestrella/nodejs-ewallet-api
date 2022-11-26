@@ -23,6 +23,8 @@ const signup = async (req, res) => {
   const userId = user._id;
   const tokens = await updateTokens(userId);
 
+  await sendEmail(email);
+
   res.status(201).json({
     accessToken: tokens.accessToken,
     refreshToken: tokens.refreshToken,

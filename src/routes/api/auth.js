@@ -33,7 +33,7 @@ const router = express.Router();
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/UserSignupResponse'
+ *              $ref: '#/components/schemas/UserAuthResponse'
  *      '400':
  *        description: Bad request (invalid request body).
  *      '409':
@@ -74,7 +74,7 @@ router.post(
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/UserLoginResponse'
+ *              $ref: '#/components/schemas/UserAuthResponse'
  *      '400':
  *        description: Bad request (invalid request body).
  *      '401':

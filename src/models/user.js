@@ -65,7 +65,7 @@ const { handleSaveError } = require("../helpers");
  *           maxLength: 16
  *           description: The user's password.
  *           example: examplepwd12345
- *     UserLoginResponse:
+ *     UserAuthResponse:
  *       type: object
  *       properties:
  *         accessToken:
