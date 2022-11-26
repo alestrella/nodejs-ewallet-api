@@ -1,11 +1,9 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-
-const { ACCESS_SECRET_KEY } = require("../../config/vars");
 
 const { User } = require("../../models/user");
 
 const { requestError } = require("../../helpers");
+const { updateTokens } = require("../../services/updateTokens");
 
 const signup = async (req, res) => {
   const { email, password, username } = req.body;
@@ -22,14 +20,12 @@ const signup = async (req, res) => {
     username,
   });
 
-  const payload = { userId: user._id };
-  const accessToken = jwt.sign(payload, ACCESS_SECRET_KEY, {
-    expiresIn: "1d",
-  });
-  await User.findByIdAndUpdate(user._id, { accessToken });
+  const userId = user._id;
+  const tokens = await updateTokens(userId);
 
   res.status(201).json({
-    accessToken,
+    accessToken: tokens.accessToken,
+    refreshToken: tokens.refreshToken,
     user: {
       email: user.email,
       username: user.username,
