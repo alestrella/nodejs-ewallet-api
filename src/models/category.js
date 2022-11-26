@@ -25,6 +25,11 @@ const categoryMongooseSchema = new Schema(
       type: String,
       required: [true, "No category name"],
     },
+    type: {
+      type: String,
+      enum: ['income','expense'],
+      required: [true, "Category has no type"],
+    }
   },
   { versionKey: false, timestamps: false }
 );
