@@ -101,11 +101,9 @@ router.post(
  *  get:
  *    tags:
  *      - Auth
- *    summary: Logout user
+ *    summary: Logout user (Requires authentication token)
  *    security:
  *      - bearerAuth: []
- *    requestBody:
- *      description: Requires authentication token
  *    responses:
  *      '204':
  *        description: Successful operation

@@ -33,7 +33,8 @@ const { handleSaveError } = require("../helpers");
  *             otherwise:
  *               type: string
  *               minLength: 24
- *               description: Required for an expense transaction
+ *               description: Category ID
+ *               example: 63599b9170efca38e2a996ed
  *         sum:
  *           type: integer
  *           description: Transaction amount
