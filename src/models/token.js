@@ -16,7 +16,7 @@ const { handleSaveError } = require("../helpers");
  *     TokenResponse:
  *       type: object
  *       properties:
- *         newAccessToken:
+ *         accessToken:
  *           type: string
  *           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzgxMjkyZGYzMjI3NWE2ZTMzOTU1YzAiLCJpYXQiOjE2Njk0MTU4MTgsImV4cCI6MTY2OTQxNjExOH0.ASP2PlkOnejm1Qq6DiwLG5tlQ1NgFRC8tgo77Oa3a7M
  *         refreshToken:

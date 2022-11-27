@@ -13,7 +13,7 @@ const refreshToken = async (req, res) => {
   const newTokens = await updateTokens(tokenData.userId);
 
   res.json({
-    newAaccessToken: newTokens.accessToken,
+    accessToken: newTokens.accessToken,
     refreshToken: refreshToken,
   });
 };
