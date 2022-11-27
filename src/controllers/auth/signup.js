@@ -4,6 +4,7 @@ const { User } = require("../../models/user");
 
 const { requestError } = require("../../helpers");
 const { updateTokens } = require("../../services/updateTokens");
+const sendEmail = require("../../helpers/sendEmail");
 
 const signup = async (req, res) => {
   const { email, password, username } = req.body;
@@ -23,7 +24,7 @@ const signup = async (req, res) => {
   const userId = user._id;
   const tokens = await updateTokens(userId);
 
-  // await sendEmail(user.email);
+  await sendEmail(user);
 
   res.status(201).json({
     accessToken: tokens.accessToken,

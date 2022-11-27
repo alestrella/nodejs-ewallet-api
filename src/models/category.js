@@ -17,6 +17,10 @@ const { handleSaveError } = require("../helpers");
  *          type: string
  *          description: Category's name
  *          example: Products
+ *        type:
+ *          type: string
+ *          description: Type of transaction must be an income or an expense
+ *          example: expense
  */
 
 const categoryMongooseSchema = new Schema(
@@ -27,9 +31,9 @@ const categoryMongooseSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ['income','expense'],
+      enum: ["income", "expense"],
       required: [true, "Category has no type"],
-    }
+    },
   },
   { versionKey: false, timestamps: false }
 );

@@ -1,18 +1,22 @@
 const sgMail = require("@sendgrid/mail");
-require("dotenv").config();
 
 const { SENDGRID_API_KEY, MAIN_EMAIL } = require("../config/vars");
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
 const sendEmail = async (user) => {
-  const dashboardLink = `/dashboard`;
   const { email, username } = user;
   const mail = {
     to: email,
-    from: MAIN_EMAIL,
+    from: {
+      email: MAIN_EMAIL,
+      name: "Wallet",
+    },
+    templateId: "d-ceceba7f3ab34f98a910fcad9d2b7b8c",
     subject: "Welcome to Wallet by Xtodo",
-    text: `Hi ${username}. Thanks for signing up to Wallet app by XTodo! Now is the time to be smart with your money. So let's put your money to work! <a target="_blank" href="${dashboardLink}">Sign In </a>`,
+    dynamicTemplateData: {
+      name: username,
+    },
   };
 
   await sgMail.send(mail);
