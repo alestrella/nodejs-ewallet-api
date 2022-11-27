@@ -17,7 +17,7 @@ const updateTokens = async (userId) => {
 
   if (!refreshTokenData.refreshToken) {
     await Token.findByIdAndUpdate(
-      tokenData._id,
+      refreshTokenData._id,
       { refreshToken },
       { new: true }
     );
