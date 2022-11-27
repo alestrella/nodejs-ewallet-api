@@ -23,7 +23,6 @@ const signup = async (req, res) => {
 
   const userId = user._id;
   const tokens = await updateTokens(userId);
-  console.log(tokens);
 
   await sendEmail(user);
 

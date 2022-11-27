@@ -14,6 +14,9 @@ const verifyRefreshToken = (req, res, next) => {
     }
     return next();
   } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      throw requestError(401, "Token exipred!");
+    }
     next(error);
   }
 };
