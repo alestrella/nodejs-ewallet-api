@@ -127,7 +127,6 @@ router.get("/logout", isLoggedIn, ctrlWrapper(ctrlAuth.logout));
  *    security:
  *      - bearerAuth: []
  *    requestBody:
- *      description: Request body with session's id
  *      required: true
  *      content:
  *        application/json:

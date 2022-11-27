@@ -19,7 +19,7 @@ const { handleSaveError } = require("../helpers");
  *          example: Products
  *        type:
  *          type: string
- *          description: Type of transaction: income or expense
+ *          description: Type of transaction must be an income or an expense
  *          example: expense
  */
 
