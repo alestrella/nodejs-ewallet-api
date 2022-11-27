@@ -13,11 +13,7 @@ const swaggerDefinition = {
   servers: [
     {
       url: "https://ewallet-api.onrender.com/api",
-      description: "Main (production) server",
-    },
-    {
-      url: "http://localhost:4000/api",
-      description: "Development server",
+      description: "Production server",
     },
   ],
   tags: [
