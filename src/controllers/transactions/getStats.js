@@ -9,7 +9,7 @@ const getGroupsByCategory = async (owner, startPoint, endPoint, income) => {
         income,
         createdAt: {
           $gte: startPoint,
-          $lte: endPoint,
+          $lt: endPoint,
         },
       },
     },
