@@ -9,6 +9,7 @@ const authRouter = require("./routes/api/auth");
 const usersRouter = require("./routes/api/users");
 const transactionsRouter = require("./routes/api/transactions");
 const categoriesRouter = require("./routes/api/categories");
+const statsRouter = require("./routes/api/stats");
 const currencyRouter = require("./routes/api/currency");
 
 const app = express();
@@ -23,6 +24,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/transactions", transactionsRouter);
 app.use("/api/categories", categoriesRouter);
+app.use("/api/statistics", statsRouter);
 app.use("/api/currency", currencyRouter);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
