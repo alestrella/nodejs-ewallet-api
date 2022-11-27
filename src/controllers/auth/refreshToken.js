@@ -14,7 +14,7 @@ const refreshToken = async (req, res) => {
 
   res.json({
     accessToken: newTokens.accessToken,
-    refreshToken: newTokens.refreshToken,
+    refreshToken: refreshToken,
   });
 };
 
