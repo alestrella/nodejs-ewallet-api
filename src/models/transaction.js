@@ -88,6 +88,24 @@ const { handleSaveError } = require("../helpers");
  *           type: array
  *           items:
  *             $ref: '#/components/schemas/CreateTransactionResponse'
+ *
+ *     TransactionStatisticsResponse:
+ *       type: object
+ *       properties:
+ *         from:
+ *           type: string
+ *           example: 2022-10-31T22:00:00.000Z
+ *         till:
+ *           type: string
+ *           example: 2022-11-28T11:50:13.000Z
+ *         income:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/IncomeStaticticsResponse'
+ *         expense:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/ExpenseStaticticsResponse'
  */
 
 const transactionMongooseSchema = new Schema(
