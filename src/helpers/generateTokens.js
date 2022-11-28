@@ -15,22 +15,3 @@ const generateTokens = async (userId) => {
 };
 
 module.exports = generateTokens;
-
-// const generateAccessTokens = (userId) => {
-//   return jwt.sign({ userId }, ACCESS_SECRET_KEY, {
-//     expiresIn: "10m",
-//   });
-// };
-
-// const generateRefreshTokens = (userId) => {
-//   const refreshToken = jwt.sign({ userId }, REFRESH_SECRET_KEY, {
-//     expiresIn: "30d",
-//   });
-
-//   return refreshToken;
-// };
-
-// module.exports = {
-//   generateAccessTokens,
-//   generateRefreshTokens,
-// };
