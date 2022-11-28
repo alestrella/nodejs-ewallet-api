@@ -130,14 +130,14 @@ router.delete(
  *         name: from
  *         schema:
  *           type: string
- *         description: Returned transaction statistics FROM the selected period
+ *         description: Returned transaction statistics FROM the chosen date
  *         example: 2022, 2022-11 or 2022-11-28
  *         required: true
  *       - in: query
  *         name: till
  *         schema:
  *           type: string
- *         description: Returned transaction statistics TO the selected period (OPTIONAL)
+ *         description: Returned transaction statistics TO the chosen date (OPTIONAL)
  *         example: 2022, 2022-12 or 2022-12-30
  *     responses:
  *       '200':
