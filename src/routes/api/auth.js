@@ -95,6 +95,10 @@ router.post(
   ctrlWrapper(ctrlAuth.login)
 );
 
+router.get("/google", ctrlWrapper(ctrlAuth));
+
+router.get("/google-redirect", ctrlWrapper(ctrlAuth));
+
 /**
  * @swagger
  * /auth/logout:
