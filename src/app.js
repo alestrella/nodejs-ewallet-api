@@ -1,9 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
+const swaggerUi = require("swagger-ui-express");
+
+const swaggerSpec = require("./config/swagger");
 
 const authRouter = require("./routes/api/auth");
+const usersRouter = require("./routes/api/users");
 const transactionsRouter = require("./routes/api/transactions");
+const categoriesRouter = require("./routes/api/categories");
+const currencyRouter = require("./routes/api/currency");
 
 const app = express();
 
@@ -13,8 +19,13 @@ app.use(logger(format));
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/users", authRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/users", usersRouter);
 app.use("/api/transactions", transactionsRouter);
+app.use("/api/categories", categoriesRouter);
+app.use("/api/currency", currencyRouter);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
