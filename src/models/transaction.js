@@ -50,7 +50,7 @@ const { handleSaveError } = require("../helpers");
  *         date:
  *           type: string
  *           description: Transaction creation date
- *           example: 2022-11-20T18:28:17.909+00:00
+ *           example: 2022-11-28T18:28:17.909+00:00
  *         income:
  *           type: boolean
  *           description: Income or expense type of transaction.
@@ -77,10 +77,10 @@ const { handleSaveError } = require("../helpers");
  *       properties:
  *         page:
  *           type: integer
- *           example: 1
+ *           example: 0
  *         totalPages:
  *           type: integer
- *           example: 13
+ *           example: 5
  *         totalBalance:
  *           type: integer
  *           example: 24000
@@ -88,6 +88,24 @@ const { handleSaveError } = require("../helpers");
  *           type: array
  *           items:
  *             $ref: '#/components/schemas/CreateTransactionResponse'
+ *
+ *     TransactionStatisticsResponse:
+ *       type: object
+ *       properties:
+ *         from:
+ *           type: string
+ *           example: 2022-10-31T22:00:00.000Z
+ *         till:
+ *           type: string
+ *           example: 2022-11-28T11:50:13.000Z
+ *         income:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/IncomeStaticticsResponse'
+ *         expense:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/ExpenseStaticticsResponse'
  */
 
 const transactionMongooseSchema = new Schema(

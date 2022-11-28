@@ -116,4 +116,42 @@ router.delete(
   ctrlWrapper(ctrlTransactions.deleteTransaction)
 );
 
+/**
+ * @swagger
+ * /transactions/statistics:
+ *   get:
+ *     tags:
+ *       - Transactions
+ *     summary: Get statistics about user transactions
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: from
+ *         schema:
+ *           type: string
+ *         description: Returned transaction statistics FROM the selected period
+ *         example: 2022, 2022-11 or 2022-11-28
+ *         required: true
+ *       - in: query
+ *         name: till
+ *         schema:
+ *           type: string
+ *         description: Returned transaction statistics TO the selected period (OPTIONAL)
+ *         example: 2022, 2022-12 or 2022-12-30
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/TransactionStatisticsResponse'
+ *       '401':
+ *         description: Unauthorized (invalid access token)
+ *       '404':
+ *         description: Invalid user / Invalid session
+ */
+
+router.get("/statistics", isLoggedIn, ctrlWrapper(ctrlTransactions.getStats));
+
 module.exports = router;
