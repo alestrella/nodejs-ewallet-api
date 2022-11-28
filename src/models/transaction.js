@@ -50,7 +50,7 @@ const { handleSaveError } = require("../helpers");
  *         date:
  *           type: string
  *           description: Transaction creation date
- *           example: 2022-11-20T18:28:17.909+00:00
+ *           example: 2022-11-28T18:28:17.909+00:00
  *         income:
  *           type: boolean
  *           description: Income or expense type of transaction.
@@ -77,10 +77,10 @@ const { handleSaveError } = require("../helpers");
  *       properties:
  *         page:
  *           type: integer
- *           example: 1
+ *           example: 0
  *         totalPages:
  *           type: integer
- *           example: 13
+ *           example: 5
  *         totalBalance:
  *           type: integer
  *           example: 24000
