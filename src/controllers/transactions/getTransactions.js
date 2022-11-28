@@ -8,11 +8,20 @@ const getTransactions = async (req, res) => {
   const pageLength = +page ? limit : 0;
   const searchQuery = { owner };
   const data = await Transaction.find(searchQuery, "-updatedAt")
-    .sort({ createdAt: -1 })
+    .sort({ operationDate: -1 })
     .skip(skip)
     .limit(pageLength);
   const transactions = data.map(
-    ({ _id, income, comment, category, sum, balance, createdAt }) => ({
+    ({
+      _id,
+      income,
+      comment,
+      category,
+      sum,
+      balance,
+      createdAt,
+      operationDate,
+    }) => ({
       id: _id,
       date: createdAt,
       income,
@@ -20,6 +29,7 @@ const getTransactions = async (req, res) => {
       category,
       sum,
       balance,
+      operationDate,
     })
   );
   const totalBalance = await getBalance(owner);

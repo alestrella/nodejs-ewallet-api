@@ -11,7 +11,7 @@ const deleteTransaction = async (req, res) => {
   }
   if (transaction) {
     const correction = transaction.income ? -transaction.sum : transaction.sum;
-    recalculateBalance(owner, transaction.createdAt, correction);
+    recalculateBalance(owner, transaction.operationDate, correction);
   }
   res.status(200).json({ id, message: "Transaction deleted" });
 };

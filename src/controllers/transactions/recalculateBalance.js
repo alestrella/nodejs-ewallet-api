@@ -8,7 +8,7 @@ const recalculateBalance = async (owner, date, correction) => {
       {
         $match: {
           owner,
-          createdAt: { $gt: date },
+          operationDate: { $gt: date },
         },
       },
       {
@@ -19,7 +19,7 @@ const recalculateBalance = async (owner, date, correction) => {
           comment: "$comment",
           sum: "$sum",
           balance: { $sum: ["$balance", correction] },
-          createdAt: "$createdAt",
+          operationDate: "$operationDate",
         },
       },
       {
