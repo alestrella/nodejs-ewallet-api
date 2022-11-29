@@ -7,7 +7,7 @@ const getGroupsByCategory = async (owner, startPoint, endPoint, income) => {
       $match: {
         owner,
         income,
-        createdAt: {
+        operationDate: {
           $gte: startPoint,
           $lt: endPoint,
         },
