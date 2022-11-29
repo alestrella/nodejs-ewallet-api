@@ -127,6 +127,10 @@ const transactionMongooseSchema = new Schema(
       type: Number,
       required: [true, "Please, enter a sum of transaction"],
     },
+    operationDate: {
+      type: String,
+      required: [true, "Transaction date is required"],
+    },
     balance: {
       type: Number,
       required: [true, "No balance attached"],
@@ -146,6 +150,7 @@ const Transaction = model("transaction", transactionMongooseSchema);
 
 // ------------------------------- joi schemas start -------------------------------
 const Joi = require("joi");
+const { string } = require("joi");
 
 const addTransactionSchema = Joi.object({
   income: Joi.boolean().required(),
@@ -156,6 +161,7 @@ const addTransactionSchema = Joi.object({
     otherwise: Joi.string().hex().length(24).required(),
   }),
   sum: Joi.number().required(),
+  date: Joi.string(),
 });
 
 const transactionJoiSchemas = {
