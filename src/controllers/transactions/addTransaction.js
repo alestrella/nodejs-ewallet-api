@@ -6,7 +6,9 @@ const recalculateBalance = require("./recalculateBalance");
 const addTransaction = async (req, res) => {
   const { _id: owner } = req.user;
   const body = req.body;
-  const date = body.date || new Date().toISOString();
+  const date = body.date
+    ? new Date(body.date).toISOString()
+    : new Date().toISOString();
   let balance = await getBalance(owner, date);
   balance = body.income ? balance + body.sum : balance - body.sum;
   const transaction = await Transaction.create({
