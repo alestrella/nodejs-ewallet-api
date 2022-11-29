@@ -12,24 +12,14 @@ const getTransactions = async (req, res) => {
     .skip(skip)
     .limit(pageLength);
   const transactions = data.map(
-    ({
-      _id,
-      income,
-      comment,
-      category,
-      sum,
-      balance,
-      createdAt,
-      operationDate,
-    }) => ({
+    ({ _id, income, comment, category, sum, balance, operationDate }) => ({
       id: _id,
-      date: createdAt,
+      date: operationDate,
       income,
       comment,
       category,
       sum,
       balance,
-      operationDate,
     })
   );
   const totalBalance = await getBalance(owner);

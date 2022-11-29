@@ -161,7 +161,7 @@ const addTransactionSchema = Joi.object({
     otherwise: Joi.string().hex().length(24).required(),
   }),
   sum: Joi.number().required(),
-  operationDate: Joi.string(),
+  date: Joi.string(),
 });
 
 const transactionJoiSchemas = {
