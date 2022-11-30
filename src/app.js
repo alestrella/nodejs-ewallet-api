@@ -21,9 +21,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
-app.use("/link", (req, res) =>
-  res.sendFile(path.join(__dirname, "../public/index.html"))
-);
 app.use("/api/users", usersRouter);
 app.use("/api/transactions", transactionsRouter);
 app.use("/api/categories", categoriesRouter);
