@@ -1,7 +1,5 @@
 const bcrypt = require("bcryptjs");
-
 const { User } = require("../../models/user");
-
 const { requestError } = require("../../helpers");
 const { updateTokens } = require("../../services/updateTokens");
 
@@ -14,7 +12,6 @@ const login = async (req, res) => {
   if (!user || !passwordCompare) {
     throw requestError(401, "Email or password is wrong");
   }
-
   const userId = user._id;
   const tokens = await updateTokens(userId);
 

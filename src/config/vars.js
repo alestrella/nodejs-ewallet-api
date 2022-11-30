@@ -3,8 +3,12 @@ require("dotenv").config();
 const {
   DB_HOST = "",
   PORT = 4000,
+  BASE_URL,
+  FRONTEND_URL,
   ACCESS_SECRET_KEY,
   REFRESH_SECRET_KEY,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
   SENDGRID_API_KEY,
   MAIN_EMAIL,
 } = process.env;
@@ -12,8 +16,12 @@ const {
 module.exports = {
   DB_HOST,
   PORT,
+  BASE_URL,
+  FRONTEND_URL,
   ACCESS_SECRET_KEY,
   REFRESH_SECRET_KEY,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
   SENDGRID_API_KEY,
   MAIN_EMAIL,
 };
