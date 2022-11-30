@@ -14,7 +14,7 @@ const getTransactions = async (req, res) => {
   const transactions = data.map(
     ({ _id, income, comment, category, sum, balance, operationDate }) => ({
       id: _id,
-      date: operationDate,
+      date: new Date(operationDate).toISOString(),
       income,
       comment,
       category,

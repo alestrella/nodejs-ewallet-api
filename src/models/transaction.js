@@ -21,20 +21,9 @@ const { handleSaveError } = require("../helpers");
  *           description: Transaction description.
  *           example: Robot vacuum
  *         category:
- *           type: object
- *           description: If an expense transaction add these values
- *           properties:
- *             is:
- *               type: boolean
- *               example: true
- *             then:
- *               type: string
- *               length: 24
- *             otherwise:
- *               type: string
- *               minLength: 24
- *               description: Category ID
- *               example: 63599b9170efca38e2a996ed
+ *           type: string
+ *           description: Category ID
+ *           example: 63599b9170efca38e2a996ed
  *         sum:
  *           type: integer
  *           description: Transaction amount

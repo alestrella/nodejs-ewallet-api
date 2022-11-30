@@ -1,6 +1,7 @@
 # EWallet API
 
-E-Wallet Rest API (Using Node.js, Express and MongoDB)
+E-Wallet Rest API (Using Node.js, Express and MongoDB). 
+The app is deployed at https://ewallet-api.onrender.com/api
 
 ## API Reference
 
