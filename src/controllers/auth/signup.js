@@ -1,10 +1,7 @@
 const bcrypt = require("bcryptjs");
-
 const { User } = require("../../models/user");
-
-const { requestError } = require("../../helpers");
+const { requestError, sendEmail } = require("../../helpers");
 const { updateTokens } = require("../../services/updateTokens");
-const sendEmail = require("../../helpers/sendEmail");
 
 const signup = async (req, res) => {
   const { email, password, username } = req.body;
@@ -20,10 +17,8 @@ const signup = async (req, res) => {
     password: hashPassword,
     username,
   });
-
   const userId = user._id;
   const tokens = await updateTokens(userId);
-
   await sendEmail(user);
 
   res.status(201).json({

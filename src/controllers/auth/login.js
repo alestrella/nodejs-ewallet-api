@@ -1,10 +1,7 @@
 const bcrypt = require("bcryptjs");
-
 const { User } = require("../../models/user");
-
 const { requestError } = require("../../helpers");
 const { updateTokens } = require("../../services/updateTokens");
-const { Token } = require("../../models/token");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -15,10 +12,9 @@ const login = async (req, res) => {
   if (!user || !passwordCompare) {
     throw requestError(401, "Email or password is wrong");
   }
-
   const userId = user._id;
   const tokens = await updateTokens(userId);
-  // const oldRefreshToken = Token.
+
   res.json({
     accessToken: tokens.accessToken,
     refreshToken: tokens.refreshToken,

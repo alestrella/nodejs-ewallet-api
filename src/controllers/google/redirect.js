@@ -2,7 +2,6 @@ const queryString = require("query-string");
 const axios = require("axios");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcryptjs");
-
 const {
   BASE_URL,
   FRONTEND_URL,
@@ -10,6 +9,8 @@ const {
   GOOGLE_CLIENT_SECRET,
 } = require("../../config/vars");
 const { User } = require("../../models/user");
+const { updateTokens } = require("../../services/updateTokens");
+const { sendEmail } = require("../../helpers");
 
 const googleRedirect = async (req, res) => {
   const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
@@ -48,6 +49,7 @@ const googleRedirect = async (req, res) => {
       password: hashPassword,
       username: name,
     });
+    await sendEmail(user);
   }
   const userId = user._id;
   const tokens = await updateTokens(userId);
