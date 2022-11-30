@@ -4,6 +4,7 @@ const { User } = require("../../models/user");
 
 const { requestError } = require("../../helpers");
 const { updateTokens } = require("../../services/updateTokens");
+const { Token } = require("../../models/token");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -17,7 +18,7 @@ const login = async (req, res) => {
 
   const userId = user._id;
   const tokens = await updateTokens(userId);
-
+  // const oldRefreshToken = Token.
   res.json({
     accessToken: tokens.accessToken,
     refreshToken: tokens.refreshToken,

@@ -2,6 +2,7 @@ const express = require("express");
 
 const { ctrlWrapper } = require("../../helpers");
 const ctrlAuth = require("../../controllers/auth");
+const crtlGoogle = require("../../controllers/google");
 
 const {
   validator,
@@ -95,9 +96,9 @@ router.post(
   ctrlWrapper(ctrlAuth.login)
 );
 
-router.get("/google", ctrlWrapper(ctrlAuth));
+router.get("/google", ctrlWrapper(crtlGoogle.googleAuth));
 
-router.get("/google-redirect", ctrlWrapper(ctrlAuth));
+router.get("/google-redirect", ctrlWrapper(crtlGoogle.googleRedirect));
 
 /**
  * @swagger
