@@ -40,18 +40,19 @@ const googleRedirect = async (req, res) => {
   // ------ SINGUP AND LOGIN ------
   const { email, name } = userData.data;
   const user = await User.findOne({ email });
+
   if (!user) {
     const password = uuidv4();
     const hashPassword = await bcrypt.hash(password, 10);
 
     const userGoogle = await User.create({
-      email,
+      email: email,
       password: hashPassword,
       username: name,
     });
     const userId = userGoogle._id;
     const tokens = await updateTokens(userId);
-    await sendEmail(user);
+    await sendEmail(userGoogle);
 
     return res.redirect(
       `${FRONTEND_URL}?accessToken=${tokens.accessToken}&refreshToken=${tokens.refreshToken}`
