@@ -2,7 +2,7 @@ const { Transaction } = require("../../models/transaction");
 
 const recalculateBalance = async (owner, date, correction) => {
   // recalculate collection after the data
-  console.log("recalculation function running from ", date);
+  // console.log("recalculation function running from ", date);
   try {
     const result = await Transaction.aggregate([
       {
