@@ -10,7 +10,7 @@ const {
 } = require("../../config/vars");
 const { User } = require("../../models/user");
 const { updateTokens } = require("../../services/updateTokens");
-const { sendEmail, requestError } = require("../../helpers");
+const { sendEmail } = require("../../helpers");
 
 const googleRedirect = async (req, res) => {
   const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
@@ -39,8 +39,7 @@ const googleRedirect = async (req, res) => {
 
   // ------ SINGUP AND LOGIN ------
   const { email, name } = userData.data;
-  console.log(userData.data);
-  const user = await User.findOne({ email, username: name });
+  const user = await User.findOne({ email });
   if (!user) {
     const password = uuidv4();
     const hashPassword = await bcrypt.hash(password, 10);
