@@ -1,8 +1,7 @@
 const { Category } = require("../../models/category");
 
 const getAll = async (req, res) => {
-  const filter = {};
-  const data = await Category.find(filter);
+  const data = await Category.find({});
   const resData = data.map((rec) => ({
     id: rec._id,
     name: rec.name,
