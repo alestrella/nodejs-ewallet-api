@@ -55,7 +55,7 @@ const googleRedirect = async (req, res) => {
   const tokens = await updateTokens(userId);
 
   return res.redirect(
-    `${FRONTEND_URL}?accessToken=${tokens.accessToken}&refreshToken=${tokens.refreshToken}&email=${email}&username=${name}`
+    `${FRONTEND_URL}?accessToken=${tokens.accessToken}&refreshToken=${tokens.refreshToken}`
   );
 };
 
