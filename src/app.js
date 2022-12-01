@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
-const path = require("path");
 const swaggerUi = require("swagger-ui-express");
 
 const swaggerSpec = require("./config/swagger");
@@ -19,11 +18,6 @@ const format = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(format));
 app.use(cors());
 app.use(express.json());
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);

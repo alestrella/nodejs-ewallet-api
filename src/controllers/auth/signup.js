@@ -6,18 +6,18 @@ const { updateTokens } = require("../../services/updateTokens");
 const signup = async (req, res) => {
   const { email, password, username } = req.body;
 
-  let user = await User.findOne({ email });
+  const user = await User.findOne({ email });
   if (user) {
     throw requestError(409, "Email in use");
   }
   const hashPassword = await bcrypt.hash(password, 10);
 
-  user = await User.create({
+  const newUser = await User.create({
     email,
     password: hashPassword,
     username,
   });
-  const userId = user._id;
+  const userId = newUser._id;
   const tokens = await updateTokens(userId);
   await sendEmail(user);
 
