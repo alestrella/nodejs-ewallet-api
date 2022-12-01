@@ -7,8 +7,8 @@ const sendEmail = require("../../helpers/sendEmail");
 const signup = async (req, res) => {
   const { email, password, username } = req.body;
 
-  const oldUser = await User.findOne({ email });
-  if (oldUser) {
+  const candidateUser = await User.findOne({ email });
+  if (candidateUser) {
     throw requestError(409, "Email in use");
   }
   const hashPassword = await bcrypt.hash(password, 10);
